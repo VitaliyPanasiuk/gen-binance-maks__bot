@@ -4,7 +4,7 @@ from aiogram.types import Message,FSInputFile
 from tgbot.config import load_config
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
-from magic_filter import F
+from aiogram import F
 
 import time
 from datetime import datetime
@@ -12,6 +12,10 @@ import requests
 import asyncio
 
 from tgbot.services.del_message import delete_message
+from tgbot.misc.functions import reg_user, auf
+from tgbot.misc.states import deposit_detail_state
+
+from tgbot.keyboards.textBtn import main_menu_button,network_menu_button,wifi_menu_button,battery_menu_button
 
 from tgbot.keyboards.inlineBtn import CastomCallback
 # CastomCallback.filter(F.action == "") // callback_query: types.CallbackQuery, callback_data: SellersCallbackFactory, state: FSMContext
@@ -36,24 +40,12 @@ cur = base.cursor()
 # hanldler for commands
 @user_router.message(Command("start"))
 async def user_start(message: Message):
-    msg = await bot.send_message(user_id, "Вітаю, звичайний користувач!")
-    asyncio.create_task(delete_message(msg, 20))
-    
-    
-# hanldler for text messages
-# 1 version
-@user_router.message(Text('Главное меню'))
-async def user_start(message: types.Message, state: FSMContext):
     user_id = message.from_user.id
+    if await auf(user_id):
+        pass
+    else:
+        await reg_user(user_id,message.from_user.username)
     
-# 2 version
-@user_router.message(F.text == 'Главное меню')
-async def user_start(message: types.Message, state: FSMContext):
-    user_id = message.from_user.id
-
-# version for some text messages
-# @user_router.message(F.text.in_({'Покупка акаунтов бирж', 'Покупка кошелька Юмани'}))
-
-@user_router.callback_query(CastomCallback.filter(F.action == "end_transaction"))
-async def user_start(callback_query: types.CallbackQuery,callback_data: CastomCallback,state: FSMContext,):
-    user_id = callback_query.from_user.id
+    btn = main_menu_button()
+    await bot.send_message(user_id, "Здравствуйте, выберите интерисующий вас скриншот",reply_markup=btn.as_markup(resize_keyboard=True))
+    

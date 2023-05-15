@@ -12,10 +12,12 @@ async def postgre_start():
     password=config.db.password,
     host=config.db.host,)
     cur = base.cursor()
+    print('conn')
     if base:
         logging.info(f"data base connect success!")
-    cur.execute('''CREATE TABLE IF NOT EXISTS (
-        
+    cur.execute('''CREATE TABLE IF NOT EXISTS users(
+            id BIGINT PRIMARY KEY,
+            username TEXT
         )''')
     
     
