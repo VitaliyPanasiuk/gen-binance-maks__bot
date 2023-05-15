@@ -13,7 +13,7 @@ import asyncio
 import os
 
 from tgbot.services.del_message import delete_message
-from tgbot.misc.functions import reg_user, auf
+# from tgbot.misc.functions import reg_user, auf
 from tgbot.misc.states import main_screen_state
 from tgbot.misc.texts import info_of_screens
 
@@ -34,13 +34,14 @@ main_screen_router = Router()
 config = load_config(".env")
 bot = Bot(token=config.tg_bot.token, parse_mode='HTML')
 
-base = psycopg2.connect(
-    dbname=config.db.database,
-    user=config.db.user,
-    password=config.db.password,
-    host=config.db.host,
-)
-cur = base.cursor()
+# base = psycopg2.connect(
+#     dbname=config.db.database,
+#     user=config.db.user,
+#     password=config.db.password,
+#     host=config.db.host,
+# )
+# cur = base.cursor()
+
     
     
 @main_screen_router.message(Text('Main balance'))

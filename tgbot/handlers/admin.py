@@ -28,13 +28,14 @@ admin_router.message.filter(AdminFilter())
 config = load_config(".env")
 bot = Bot(token=config.tg_bot.token, parse_mode='HTML')
 
-base = psycopg2.connect(
-    dbname=config.db.database,
-    user=config.db.user,
-    password=config.db.password,
-    host=config.db.host,
-)
-cur = base.cursor()
+# base = psycopg2.connect(
+#     dbname=config.db.database,
+#     user=config.db.user,
+#     password=config.db.password,
+#     host=config.db.host,
+# )
+# cur = base.cursor()
+
 
 
 @admin_router.message(Text('admin'))

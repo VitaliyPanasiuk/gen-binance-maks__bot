@@ -16,40 +16,40 @@ bot = Bot(token=config.tg_bot.token, parse_mode="HTML")
 
 
 
-async def auf(user_id):
-    base = psycopg2.connect(
-        dbname=config.db.database,
-        user=config.db.user,
-        password=config.db.password,
-        host=config.db.host,
-    )
-    cur = base.cursor()
+# async def auf(user_id):
+#     base = psycopg2.connect(
+#         dbname=config.db.database,
+#         user=config.db.user,
+#         password=config.db.password,
+#         host=config.db.host,
+#     )
+#     cur = base.cursor()
 
-    cur.execute(f"SELECT * FROM users WHERE id = {user_id}")
-    buyer = cur.fetchall()
-    if len(buyer) > 0:
-        base.commit()
-        cur.close()
-        base.close()
-        return True
-    else:
-        base.commit()
-        cur.close()
-        base.close()    
-        return False
+#     cur.execute(f"SELECT * FROM users WHERE id = {user_id}")
+#     buyer = cur.fetchall()
+#     if len(buyer) > 0:
+#         base.commit()
+#         cur.close()
+#         base.close()
+#         return True
+#     else:
+#         base.commit()
+#         cur.close()
+#         base.close()    
+#         return False
     
-async def reg_user(user_id,username):
-    base = psycopg2.connect(
-        dbname=config.db.database,
-        user=config.db.user,
-        password=config.db.password,
-        host=config.db.host,
-    )
-    cur = base.cursor()
+# async def reg_user(user_id,username):
+#     base = psycopg2.connect(
+#         dbname=config.db.database,
+#         user=config.db.user,
+#         password=config.db.password,
+#         host=config.db.host,
+#     )
+#     cur = base.cursor()
     
-    cur.execute(f"INSERT INTO users VALUES ({user_id},'{username}')")
+#     cur.execute(f"INSERT INTO users VALUES ({user_id},'{username}')")
     
-    base.commit()
-    cur.close()
-    base.close()
+#     base.commit()
+#     cur.close()
+#     base.close()
     

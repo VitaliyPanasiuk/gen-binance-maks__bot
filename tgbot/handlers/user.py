@@ -12,7 +12,7 @@ import requests
 import asyncio
 
 from tgbot.services.del_message import delete_message
-from tgbot.misc.functions import reg_user, auf
+# from tgbot.misc.functions import reg_user, auf
 from tgbot.misc.states import deposit_detail_state
 
 from tgbot.keyboards.textBtn import main_menu_button,network_menu_button,wifi_menu_button,battery_menu_button
@@ -29,22 +29,22 @@ user_router = Router()
 config = load_config(".env")
 bot = Bot(token=config.tg_bot.token, parse_mode='HTML')
 
-base = psycopg2.connect(
-    dbname=config.db.database,
-    user=config.db.user,
-    password=config.db.password,
-    host=config.db.host,
-)
-cur = base.cursor()
+# base = psycopg2.connect(
+#     dbname=config.db.database,
+#     user=config.db.user,
+#     password=config.db.password,
+#     host=config.db.host,
+# )
+# cur = base.cursor()
 
 # hanldler for commands
 @user_router.message(Command("start"))
 async def user_start(message: Message):
     user_id = message.from_user.id
-    if await auf(user_id):
-        pass
-    else:
-        await reg_user(user_id,message.from_user.username)
+    # if await auf(user_id):
+    #     pass
+    # else:
+    #     await reg_user(user_id,message.from_user.username)
     
     btn = main_menu_button()
     await bot.send_message(user_id, "Здравствуйте, выберите интерисующий вас скриншот",reply_markup=btn.as_markup(resize_keyboard=True))

@@ -11,7 +11,7 @@ from tgbot.handlers.deposit_detail import deposit_detail_router
 from tgbot.handlers.transaction_history import transaction_history_router
 from tgbot.handlers.main_screen import main_screen_router
 from tgbot.middlewares.config import ConfigMiddleware
-from tgbot.db import start_db
+# from tgbot.db import start_db
 from tgbot.services import broadcaster
 
 logger = logging.getLogger(__name__)
@@ -27,7 +27,7 @@ def register_global_middlewares(dp: Dispatcher, config):
 
 
 async def main():
-    await start_db.postgre_start()
+    # await start_db.postgre_start()
     logging.basicConfig(
         level=logging.INFO,
         format=u'%(filename)s:%(lineno)d #%(levelname)-8s [%(asctime)s] - %(name)s - %(message)s',
